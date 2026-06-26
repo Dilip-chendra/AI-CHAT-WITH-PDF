@@ -80,7 +80,7 @@ st.markdown("""
 if "pdf_chat_history" not in st.session_state:
     st.session_state.pdf_chat_history = []
 
-left_panel, right_panel = st.columns([1, 2], gap="large")
+left_panel, right_panel = st.columns(2, gap="large")
 
 with left_panel:
     st.markdown('<div class="glass-card">', unsafe_allow_html=True)
@@ -114,9 +114,7 @@ with left_panel:
         st.markdown('<div class="glass-card" style="text-align:center; padding:40px !important; color:#64748b;">🔄 Awaiting document ingestion matrix initialization.</div>', unsafe_allow_html=True)
 
 with right_panel:
-    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-    st.markdown("<h1>🧠 :rainbow[Cognitive Query Space]</h1>", unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.title("🧠 :rainbow[Cognitive Query Space]")
     
     for chat in st.session_state.pdf_chat_history:
         if chat["role"] == "user":
