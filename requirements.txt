@@ -1,9 +1,8 @@
 fastapi
-uvicorn
+uvicorn[standard]
 pydantic
-pypdf2
-langchain
-langchain-openrouter
-langchain-community
+PyPDF2
 streamlit
 requests
+langchain-openrouter
+scikit-learn
