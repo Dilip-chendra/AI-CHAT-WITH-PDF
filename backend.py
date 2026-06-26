@@ -1,12 +1,15 @@
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 from langchain_text_splitters import CharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain_classic.chains.question_answering import load_qa_chain
-
+from langchain_core.vectorstores import InMemoryVectorStore
+from langchain.chains.question_answering import load_qa_chain
 from langchain_openrouter import ChatOpenRouter
-from secret_key import openrouter_api_key1
+
+try:
+    from secret_key import openrouter_api_key1
+except ImportError:
+    openrouter_api_key1 = os.environ.get("OPENROUTER_API_KEY", "")
 
 app = FastAPI()
 
@@ -21,7 +24,7 @@ class PDFQueryPayload(BaseModel):
 
 @app.get("/")
 def hello():
-    return {"Message": "Hello! Welcome To The Neural PDF Chat backend infrastructure."}
+    return {"Message": "Hello! Welcome To The Lightweight Neural PDF Chat backend."}
 
 @app.post("/pdf_query")
 def process_pdf_chat(payload: PDFQueryPayload):
@@ -34,8 +37,7 @@ def process_pdf_chat(payload: PDFQueryPayload):
         )
         chunks = text_splitter.split_text(payload.text)
         
-        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        knowledge_base = FAISS.from_texts(chunks, embeddings)
+        knowledge_base = InMemoryVectorStore.from_texts(chunks, model)
         docs = knowledge_base.similarity_search(payload.question)
         
         chain = load_qa_chain(model, chain_type="stuff")

@@ -4,9 +4,6 @@ pydantic
 pypdf2
 langchain
 langchain-openrouter
-langchain-huggingface
 langchain-community
-faiss-cpu
-sentence-transformers
 streamlit
 requests
