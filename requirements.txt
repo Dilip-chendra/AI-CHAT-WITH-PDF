@@ -1,8 +1,11 @@
 fastapi
 uvicorn[standard]
 pydantic
-PyPDF2
 streamlit
 requests
+PyPDF2
+langchain-core
+langchain-text-splitters
+langchain-huggingface
 langchain-openrouter
-scikit-learn
+sentence-transformers
