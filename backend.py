@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.chains.question_answering import load_qa_chain
+
+from langchain_text_splitters import CharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_classic.chains.question_answering import load_qa_chain
+
 from langchain_openrouter import ChatOpenRouter
 from secret_key import openrouter_api_key1
 
